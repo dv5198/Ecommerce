@@ -1,0 +1,71 @@
+{% include 'base.html' %}
+{% comment %} {% block title %}Famms Online Shopping| User Order History{% endblock %} {% endcomment %}
+{% block content %}
+
+{% block extra_styles%}
+<style>
+.summary{
+	border-top: 2px solid #5ea4f3;
+    background-color: #f7fbff;
+    height: 100%;
+    padding: 30px;
+    margin: 3%;
+}
+.summary-item span{
+    margin: 3%;
+
+}
+.img-fluid {
+    padding-bottom: 20px;
+    height: 196px;
+    width: 208px;
+}
+</style>
+{% endblock extra_styles%}
+    <div class="container">
+       <div class="block-heading">
+         <h2>Your Order History</h2>
+         <hr><br>
+       </div>
+            <div class="row">
+                {% if order_data%}
+                <div class="col-md-12">
+                    <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Delivered By</th>
+                            <th scope="col">Status</th>
+                          </tr>
+                        </thead>
+                        {% for order_data in order_data%}
+                        {% for product_data in order %}
+                        <tbody>
+                          <tr>
+                            
+                            <td><img src="{{product_data.product.product_image.url}}" width="95px" height="95px" alt="{{product_data.product.product}}"/></td>
+                            <td>{{product_data.product.product}}</td>
+                            <td>{{order_data.delivered_by}}</td>
+                            <td>{{order_data.order_status}}</td>
+                          </tr>
+                        </tbody>
+                        {% endfor %}
+                        {% endfor %}
+                      </table>           
+                </div>
+                {% else %}
+                            <div class="col-sm-6 col-md-4 col-lg-4">
+                                <h6>You have Ordered Nothing  </h6><br>
+                                <div class="Add-data">
+                                    <a type="button" href="{% url 'view_products' %}" class="btn btn-outline-danger">Shop Now</a>
+                                </div>
+                              </div>
+                            {% endif %}
+            </div> 
+    </div>
+
+</main>
+{% endblock %}
+
+{% include 'footer.html'%}

@@ -1,0 +1,128 @@
+{% include 'base.html' %}
+{% comment %} {% block title %}Famms Online Shopping| User Cart{% endblock %} {% endcomment %}
+{% block content %}
+{% comment %} {% block title %}Famms Online Shopping| User Cart{% endblock %} {% endcomment %}
+{% block extra_styles%}
+<style>
+.summary{
+	border-top: 2px solid #5ea4f3;
+    background-color: #f7fbff;
+    height: 100%;
+    padding: 30px;
+    margin: 3%;
+}
+.summary-item span{
+    margin: 3%;
+
+}
+.img-fluid {
+    padding-bottom: 20px;
+    height: 196px;
+    width: 208px;
+}
+</style>
+{% endblock extra_styles%}
+    <div class="container-fluid">
+       <div class="block-heading">
+         <h2>Shopping Cart</h2>
+         <hr><br>
+       </div>
+
+            <div class="row">
+               
+                <div class="col-md-12 col-lg-8">
+                    {% if cart%}
+                    {% for cart in cart%}
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img class="img-fluid mx-auto d-block image"  src="{{cart.product.product_image.url}}">
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="info">
+                                        <div class="row">
+                                           
+                                            <div class="col-md-3 product-name">
+                                                <div class="product-name">
+                                                    <label></label>
+                                                    <b><p><a href="#">{{cart.product.product}}</a></p></b>
+                                                    <div class="product-info">
+                                                        <div>{{cart.product.product_description|truncatechars:30}}</div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 quantity">
+                                                <label for="quantity"></label>
+                                                <p id="quantity"><button class="btn btn-danger  btn-sm " id="remove_fromCart" o><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+                                                    </svg></button>&nbsp;&nbsp;&nbsp;&nbsp;{{cart.quantity}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <button class="btn btn-danger  btn-sm " id="add_toCart" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                  </svg></button></p>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label for="price"></label>
+                                                <p>{{cart.get_total_cost}}</p>
+                                               
+                                            </div>
+                                                <p id="ID" hidden>{{cart.product.id}}</p>
+                                               
+                                             <div class="col-md-3 price">
+                                                <br>
+                                                <a  class="btn btn-danger  btn-sm "  href="{% url 'remove_cart' cart.product.id %}">Remove <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                                  </svg> </a>&nbsp;&nbsp;&nbsp; 
+                                                  
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            
+                </div>
+                <div class="col-md-12 col-lg-4">
+                    <div class="summary">
+                        <h3>Summary</h3>
+                        <hr><br>
+                        <div class="summary-item"><span class="text">Total Products</span><span class="price">{{cart.count}}</span></div><hr>                       
+                        {% comment %} <div class="summary-item"><span class="text">Shipping</span><span class="price"></span></div><hr> {% endcomment %}
+                        {% comment %} <div class="summary-item"><span class="text">Total Amount</span><span class="price"> </span></div><hr> {% endcomment %}
+                        <a type="button" class="btn btn-primary btn-lg btn-block" href="{% url 'checkout'%}">Checkout</a>
+                    </div>
+                </div>
+                {% else %}
+                            <div class="col-sm-6 col-md-4 col-lg-4">
+                                <h6>Your Cart is Empty..  </h6><br>
+                                <div class="Add-data">
+                                    <a href="{% url 'wishlist_data' %}" class="btn btn-outline-danger">Add from Wishlist</a>
+                                </div>
+                              </div><br><br>
+                {% endif %}
+            </div> 
+    </div>
+
+</main>
+<script>
+
+    const val = document.getElementById('ID').innerText;
+    $(document).ready(function() {
+        $('#add_toCart').click(function() {
+            $.ajax({
+                url:`/add_toCart/${val}`
+              })
+            
+        })
+        $('#remove_fromCart').click(function() {
+            $.ajax({
+              url:`/remove_fromCart/${val}`
+            })
+            
+        })
+    });
+</script>
+{% endblock %}
+
+{% include 'footer.html'%}

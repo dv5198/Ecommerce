@@ -1,0 +1,47 @@
+{% include 'base.html' %}
+{% comment %} {% block title %}Famms Online Shopping| User Login{% endblock %} {% endcomment %}
+{% block content %}
+
+         
+          <!-- INNER PAGE SECTION -->
+          <section class="inner_page_head">
+            <div class="container_fuild">
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="full">
+                        <u><h3>Login</h3></u>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         
+         <!-- END INNER PAGE SECTION -->
+         <!-- LOGIN FORM -->
+      <section class="why_section layout_padding">
+        <div class="container">
+         {% include 'message.html' %}
+           <div class="row">
+              <div class="col-lg-8 offset-lg-2">
+                 <div class="full">
+                    <form class="form" method="POST" action="{% url 'user_check' %}" name="Login" id="Login" >
+                        {% csrf_token%}
+                       <fieldset>
+                          <input type="email" placeholder="Enter your email address" name="username" required />
+                          <input type="password"  placeholder="****" name="password" required />
+                          <label><a href="{% url 'forget_password' %}">Forgot Password</a></label>
+                          <label>Not Registered <a href="{% url 'user_signup' %}">SignUp</a></label>
+                          <input type="submit" value="Submit" />
+                          
+                         
+
+                       </fieldset>
+                    </form>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </section>
+     <!-- END LOGIN FORM -->
+{% endblock %}
+{% include 'footer.html'%}

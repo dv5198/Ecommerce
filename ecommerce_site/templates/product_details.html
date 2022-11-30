@@ -1,0 +1,74 @@
+{% include 'base.html' %}
+{% comment %} {% block title %}Famms Online Shopping| Product Details {% endblock %} {% endcomment %}
+{% block content %}
+
+     <!-- INNER PAGE SECTION -->
+     <section class="inner_page_head">
+        <div class="container_fuild">
+           <div class="row">
+              <div class="col-md-12">
+                 <div class="full">
+                    <u><h3>Product Description</h3></u>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </section>
+     <!-- END INNER PAGE SECTION -->
+
+  <!--PRODUCT SECTION -->
+  <main class="mt-5 pt-4">
+    {% include 'message.html' %}
+	{% for product in products %}
+    <div class="container dark-grey-text mt-5">
+      <div class="row">
+        <div class="col-md-6 mb-4">
+		  <img src="{{ product.product_image.url}}" alt="{{ product.product}}" width="90%" height="375px"/>
+        </div>
+        <div class="col-md-6 mb-4">
+			<h3 class="product-title">{{product.product}}</h3>
+            <p class="lead">
+				<h5 class="price">current price: <span>&nbsp;&nbsp;&nbsp;&#x20B9; {{product.product_price}}</span></h5>
+            </p>
+
+            <p class="lead font-weight-bold">Description</p>
+
+            <p>{{product.product_description}}</p>
+            <br>
+              <a class=" btn btn-danger" href="{% url 'add_to_wishlist' product.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+                <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5ZM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1Zm0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
+                </svg></a>&nbsp;&nbsp;&nbsp;
+                <a  class="btn btn-danger "  href="{% url 'add_to_cart' product.id %}">Add to Bag </a>&nbsp;&nbsp;&nbsp;
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row d-flex justify-content-center wow fadeIn">
+        <div class="col-md-6 text-center">
+          <h4 class="my-4 h4">Similar Products</h4>
+        </div>
+      </div>
+      {% comment %} <div class="row">
+        <div class="col-lg-4 col-md-12 mb-4">
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/11.jpg" class="img-fluid" alt="">
+
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/12.jpg" class="img-fluid" alt="">
+
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" class="img-fluid" alt="">
+
+        </div>
+
+      </div> {% endcomment %}
+    </div>
+	{% endfor %}
+  </main>
+  
+  <!--END PRODUCT SECTION-->
+{% endblock %}
+{% include 'footer.html'%}

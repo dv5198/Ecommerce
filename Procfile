@@ -1,0 +1,1 @@
+web: gunicorn Ecommerce.wsgi   --preload --workers 1

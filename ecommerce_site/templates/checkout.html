@@ -1,0 +1,67 @@
+{% include 'base.html' %}
+{% load static %}
+{% comment %} {% block title %}Famms Online Shopping| Checkout{% endblock %} {% endcomment %}
+{% block content %}
+
+          <!-- INNER PAGE SECTION -->
+          <section class="inner_page_head">
+            <div class="container_fuild">
+               
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="full">
+                        <u><h3>CheckOut</h3></u>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <!-- END INNER PAGE SECTION -->
+         <!-- CHECKOUT FORM -->
+      <section class="why_section layout_padding">
+        <div class="container">
+         {% include 'message.html' %}
+           <div class="row">
+              <div class="col-lg-6 ">
+                 <div class="full">
+                    <form class="form" method="POST" action="{% url 'confirm_order' %}" name="checkout" id="checkout">
+                        {% csrf_token%}
+                       <fieldset>
+                        <input type="FirstName" placeholder="Enter your FirstName" name="first_name" value="{{request.user.first_name}}" required />
+                        <small id="Fname"></small>
+                        <input type="LastName" placeholder="Enter your LastName" name="last_name" value="{{request.user.last_name}}" required />
+                        <small id="Lname"></small>
+                          <input type="email" placeholder="Enter your email address" name="Email" value="{{request.user.email}}" required />
+                          <small id="Email"></small>
+                          <input type="tel" name="Phno" id="Phno" placeholder="+91 xxxx-nnnnnn " value="{{request.user.phone_no}}" required/>
+                          <small id="phone"></small>
+                          <textarea  placeholder=" 3a & 5b, Rajmohan Street, Near Krishna Cinema, C R Avenue" id="Address" name="Address" style="width: 100%;height: 30%;" ></textarea>
+                          <small id="address"></small>
+                          <input type="text" placeholder="Enter your City" name="City" required />
+                          <small id="City"></small>
+                          <input type="text" placeholder="Enter your ZipCode" name="Zip" required />
+                          <small id="Zipcode"></small>
+                          <input type="submit" class="btn btn-danger " value="Checkout" />
+                       </fieldset>
+                    </form>
+                 </div>
+              </div>&nbsp;
+              <div class="col-lg-5 ">
+                <div class="card">
+                    <div class="card-body">
+                     <h4>Product Purchase Details</h4>
+                      <hr>
+                      <h6>Total No. of Products  {{total}}</h6><br>
+                      {% comment %} <h6>Total MRP</h6><br> {% endcomment %}
+                      <h6>Estimated Deleivery Date {{delivery_date}}</h6><br>
+                     
+                    </div>
+                  </div>
+              </div>
+           </div>
+        </div>
+     </section>
+     <!-- END CHECKOUT  FORM -->
+{% endblock %}
+<script type="text/javascript" src='{% static "js/validation.js" %}'></script> 
+{% include 'footer.html'%}

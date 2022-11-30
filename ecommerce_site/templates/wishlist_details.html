@@ -1,0 +1,62 @@
+{% include 'base.html' %}
+{% block content %}
+      <!-- PRODUCT SECTION -->
+      <section class="product_section layout_padding">
+        <div class="container">
+           <div class="heading_container">
+              <h6>
+                 My <span>Wishlist</span> {{wishlist.count}} Items
+              </h6>
+           </div>
+           {% include 'message.html' %}
+           <div class="row">
+               {% if wishlist %}
+            {% for data in wishlist %}
+              <div class="col-sm-6 col-md-4 col-lg-4">
+                 <div class="box">
+                    <div class="option_container">
+                        <div class="options">
+                            <a href="{% url 'product_details' data.product.id %}" class="option1">
+                           Show More
+                            </a>
+                            <a href="{% url 'remove_from_wishlist' data.product.id %}" class="option2">
+                            Remove
+                            </a>
+                         </div>
+                    </div>
+                    <div class="img-box">
+                       <img src="{{data.product.product_image.url}}" alt="">
+                    </div>
+                    <div class="detail-box">
+                       <h5>
+                          {{data.product.product}}
+                       </h5>
+                      
+                    </div>
+                    
+                 </div>
+                 <div class="detail-box"><br>
+                    {% comment %} <button type="button" class="btn btn-primary btn-lg btn-block">Block level button</button> {% endcomment %}
+                      <a  class="btn btn-outline-danger"  href="{% url 'add_to_cart' data.product.id %}">Add to Bag </a>&nbsp;&nbsp;&nbsp;
+                  </div>
+              </div>
+              
+              {% endfor %}
+              {% else %}
+              <div class="col-sm-6 col-md-4 col-lg-4">
+                <h6>Your Wishlist is Empty..  </h6><br>
+                <div class="Add-data">
+                    <a type="button" href="{% url 'view_products' %}" class="btn btn-outline-danger">See Our Products</a>
+                </div>
+              </div>
+              
+              
+              {% endif %}
+           </div>
+           
+        </div>
+     </section>
+     <!-- END PRODUCT SECTION -->
+         
+{% endblock %}
+{% include 'footer.html'%}

@@ -1,0 +1,53 @@
+{% include 'base.html' %}
+{% comment %} {% block title %}Famms Online Shopping| User SignUp{% endblock %} {% endcomment %}
+{% load static %}
+{% block content %}
+
+          <!-- INNER PAGE SECTION -->
+          <section class="inner_page_head">
+            <div class="container_fuild">
+               
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="full">
+                        <u><h3>Registration</h3></u>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <!-- END INNER PAGE SECTION -->
+         <!--USER REGISTRATION FORM -->
+      <section class="why_section layout_padding">
+        <div class="container">
+         {% include 'message.html' %}
+           <div class="row">
+              <div class="col-lg-8 offset-lg-2">
+                 <div class="full">
+                    <form class="form" method="POST" action="{% url 'user_registration' %}" name="SignUp" id="SignUp">
+                        {% csrf_token%}
+                       <fieldset>
+                        <input type="FirstName" placeholder="Enter your FirstName" name="first_name" onblur="check_firstName()" required />
+                        <small id="Fname"></small>
+                        <input type="LastName" placeholder="Enter your LastName" name="last_name" onblur="check_lastName()" required />
+                        <small id="Lname"></small>
+                          <input type="email" placeholder="Enter your email address" name="Email" required />
+                          <small id="Mail"></small>
+                          <input type="password" placeholder="Enter your Password" name="Password" required />
+                          <small id="Password"></small>
+                          <input type="tel" name="Phno" id="Phno" placeholder="+91 xxxx-nnnnnn " onblur="check_phno()" required/>
+                          <small id="phone"></small>
+                         
+                          <label>Already Registered <a href="{% url 'user_login' %}"> SignIn</a></label>
+                          <input type="submit" value="Submit" />
+                       </fieldset>
+                    </form>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </section>
+     <!-- END USER REGISTRATION FORM -->
+<script type="text/javascript" src='{% static "js/validation.js" %}'></script> 
+{% endblock %}
+{% include 'footer.html'%}
