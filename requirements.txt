@@ -39,7 +39,7 @@ pluggy==1.0.0
 py==1.11.0
 py-moneyed==1.2
 pycodestyle==2.8.0
-pymongo==3.12.1
+pymongo==4.6.3
 pyparsing==3.0.7
 PyPDF3==1.0.6
 pytest==7.0.1
