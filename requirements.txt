@@ -60,6 +60,6 @@ virtualenv==20.13.2
 virtualenvwrapper-win==1.2.7
 webencodings==0.5.1
 whitenoise
-xhtml2pdf==0.2.6
+xhtml2pdf==0.2.17
 zipp==3.7.0
 gunicorn
